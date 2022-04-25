@@ -24,13 +24,13 @@ class Snake
     new_head_position = [@head_position[X], @head_position[Y]]
     case @direction
     when LEFT
-      new_head_position[X] -= 1
+      new_head_position[X] -= SNAKE_SIZE / 2
     when RIGHT
-      new_head_position[X] += 1
+      new_head_position[X] += SNAKE_SIZE / 2
     when DOWN
-      new_head_position[Y] += 1
+      new_head_position[Y] += SNAKE_SIZE / 2
     when UP
-      new_head_position[Y] -= 1
+      new_head_position[Y] -= SNAKE_SIZE / 2
     end
     if @has_body
       @body_positions.each { |position| return false if position == new_head_position }
