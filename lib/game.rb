@@ -3,11 +3,11 @@ require_relative "snake"
 require_relative "food"
 require "pry-byebug"
 
-WINDOW_WIDTH = 200
-WINDOW_HEIGHT = 200
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 600
 class Game < Gosu::Window
   def initialize
-    super WINDOW_WIDTH, WINDOW_HEIGHT, false, update_interval = 320
+    super(WINDOW_WIDTH, WINDOW_HEIGHT, false, 300)
     self.caption = "Snake Game"
     @snake = Snake.new([WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2])
     @food = Food.new([WINDOW_WIDTH, WINDOW_HEIGHT])
@@ -38,10 +38,6 @@ class Game < Gosu::Window
     when Gosu::KbDown then @snake.turn(DOWN)
     end
   end
-
-
-
-
 
   # def direction_update
   #   case
