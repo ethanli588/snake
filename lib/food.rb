@@ -1,14 +1,23 @@
-require_relative "snake"
-require "pry-byebug"
+require_relative 'snake'
+require 'pry-byebug'
+require_relative 'position'
 
 class Food
   attr_reader :position
 
-  def initialize(window_size)
-    @position = [rand(window_size[X] / SNAKE_SIZE) * SNAKE_SIZE, rand(window_size[Y] / SNAKE_SIZE) * SNAKE_SIZE]
+  def initialize(up_left, bottom_right, size)
+    # byebug
+    @position = Position.rand_position_in_rect(up_left, bottom_right)
+    position_to_a_grid!(size)
+    @food_size = size
   end
 
-  def draw(window)
-    window.draw_rect(@position[X], @position[Y], SNAKE_SIZE, SNAKE_SIZE, Gosu::Color::RED)
+  def position_to_a_grid!(grid_size)
+    @position.x = @position.x / grid_size * grid_size
+    @position.y = @position.y / grid_size * grid_size
+  end
+
+  def show(window)
+    window.draw_rect(@position.x, @position.y, @food_size, @food_size, Gosu::Color::RED)
   end
 end

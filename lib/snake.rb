@@ -1,64 +1,56 @@
 require 'gosu'
 require_relative 'constants'
+require_relative 'position'
+require_relative 'direction'
+require 'pry-byebug'
 
 class Snake
   attr_reader :head_position
 
   def initialize(position)
-    @direction = LEFT
-    @has_body = false
+    @direction = Direction.new
     @head_position = position
     @body_positions = []
   end
 
-  def move
+  def body?
+    !@body_positions.empty?
+  end
 
-    new_head_position = [@head_position[X], @head_position[Y]]
-    case @direction
-    when LEFT
-      new_head_position[X] -= SNAKE_SIZE
-    when RIGHT
-      new_head_position[X] += SNAKE_SIZE
-    when DOWN
-      new_head_position[Y] += SNAKE_SIZE
-    when UP
-      new_head_position[Y] -= SNAKE_SIZE
-    end
-    if @has_body
-      @body_positions.each { |position| return false if position == new_head_position }
-      @body_positions.pop
-      @body_positions.unshift(@head_position)
-    end
-    @head_position = [new_head_position[X], new_head_position[Y]]
-    true
+  def stuck?
+    return false if @body_positions[0] == @head_position
+
+    @body_positions.include?(@head_position)
+  end
+
+  def move!
+    move_body! if body?
+    @head_position.move_towards!(@direction, SNAKE_SIZE)
   end
 
   def draw(window)
-    window.draw_rect(@head_position[X], @head_position[Y], SNAKE_SIZE, SNAKE_SIZE, Gosu::Color::WHITE)
-    @body_positions.each { |position| window.draw_rect(position[X] + (SNAKE_SIZE - BODY_SIZE) / 2, position[Y] + (SNAKE_SIZE - BODY_SIZE) / 2, BODY_SIZE, BODY_SIZE, Gosu::Color::YELLOW) }
+    window.draw_rect(@head_position.x, @head_position.y, SNAKE_SIZE, SNAKE_SIZE, Gosu::Color::WHITE)
+    @body_positions.each { |position| window.draw_rect(position.x + (SNAKE_SIZE - BODY_SIZE) / 2, position.y + (SNAKE_SIZE - BODY_SIZE) / 2, BODY_SIZE, BODY_SIZE, Gosu::Color::YELLOW) }
   end
 
-  def self.oppsite_direction?(x_direction, y_direction)
-    return true if [x_direction, y_direction].include?(LEFT) && [x_direction, y_direction].include?(RIGHT)
-
-    return true if [x_direction, y_direction].include?(UP) && [x_direction, y_direction].include?(DOWN)
-
-    false
+  def turn!(new_direction)
+    @direction.turn_to!(new_direction) unless @direction.oppsite?(new_direction)
   end
 
-  def turn(new_direction)
-    return false if Snake.oppsite_direction?(new_direction, @direction)
-
-    @direction = new_direction
-    true
+  def got_food!
+    expand!
   end
 
+  private
 
-  def expand
-    @body_positions.push(head_position)
-    @has_body = true
+  def move_body!
+    @body_positions.unshift(@head_position.dup)
+    @body_positions.pop
   end
 
+  def expand!
+    @body_positions.unshift(@head_position.dup)
+  end
 end
 
 

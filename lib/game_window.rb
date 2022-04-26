@@ -9,39 +9,43 @@ class GameWindow < Gosu::Window
   def initialize
     super(WINDOW_WIDTH, WINDOW_HEIGHT, false, 300)
     self.caption = "Snake Game"
-    @snake = Snake.new([WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2])
-    @food = Food.new([WINDOW_WIDTH, WINDOW_HEIGHT])
+    @snake = Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+    # byebug
+    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
   end
 
   def update
-    game_restart unless @snake.move
-    # byebug
-    game_restart unless @snake.head_position[X].between?(0, WINDOW_WIDTH) && @snake.head_position[Y].between?(0, WINDOW_HEIGHT)
-    if @snake.head_position == @food.position
-      @food = Food.new([WINDOW_WIDTH, WINDOW_HEIGHT])
-      @snake.expand
-    end
-    # direction_update
+    @snake.move!
+    game_restart if @snake.stuck?
+    game_restart unless @snake.head_position.in_rect?(Position.new, Position.new(WINDOW_WIDTH, WINDOW_HEIGHT))
+    got_food! if @snake.head_position == @food.position
   end
 
   def draw
     @snake.draw(self)
-    @food.draw(self)
+    @food.show(self)
   end
 
   def button_down(button)
     super
     case button
-    when Gosu::KbLeft then @snake.turn(LEFT)
-    when Gosu::KbRight then @snake.turn(RIGHT)
-    when Gosu::KbUp then @snake.turn(UP)
-    when Gosu::KbDown then @snake.turn(DOWN)
+    when Gosu::KbLeft then new_direction = Direction.new(Direction::LEFT)
+    when Gosu::KbRight then new_direction = Direction.new(Direction::RIGHT)
+    when Gosu::KbUp then new_direction = Direction.new(Direction::UP)
+    when Gosu::KbDown then new_direction = Direction.new(Direction::DOWN)
     end
+    @snake.turn!(new_direction)
   end
 
   def game_restart
-    @snake = Snake.new([WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2])
-    @food = Food.new([WINDOW_WIDTH, WINDOW_HEIGHT])
+    @snake = Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
   end
 
+  private
+
+  def got_food!
+    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
+    @snake.got_food!
+  end
 end
