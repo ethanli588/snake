@@ -1,13 +1,5 @@
 require 'gosu'
-
-LEFT = 0
-UP = 1
-RIGHT = 2
-DOWN = 3
-SNAKE_SIZE = 20
-BODY_SIZE = 10
-X = 0
-Y = 1
+require_relative 'constants'
 
 class Snake
   attr_reader :head_position
