@@ -22,19 +22,18 @@ class GameWindow < Gosu::Window
   end
 
   def draw
-    @snake.draw(self)
+    @snake.show(self)
     @food.show(self)
   end
 
   def button_down(button)
     super
     case button
-    when Gosu::KbLeft then new_direction = Direction.new(Direction::LEFT)
-    when Gosu::KbRight then new_direction = Direction.new(Direction::RIGHT)
-    when Gosu::KbUp then new_direction = Direction.new(Direction::UP)
-    when Gosu::KbDown then new_direction = Direction.new(Direction::DOWN)
+    when Gosu::KbLeft then @snake.turn!(Direction.new(Direction::LEFT))
+    when Gosu::KbRight then @snake.turn!(Direction.new(Direction::RIGHT))
+    when Gosu::KbUp then @snake.turn!(Direction.new(Direction::UP))
+    when Gosu::KbDown then @snake.turn!(Direction.new(Direction::DOWN))
     end
-    @snake.turn!(new_direction)
   end
 
   def game_restart

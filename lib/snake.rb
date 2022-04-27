@@ -28,7 +28,7 @@ class Snake
     @head_position.move_towards!(@direction, SNAKE_SIZE)
   end
 
-  def draw(window)
+  def show(window)
     window.draw_rect(@head_position.x, @head_position.y, SNAKE_SIZE, SNAKE_SIZE, Gosu::Color::WHITE)
     @body_positions.each { |position| window.draw_rect(position.x + (SNAKE_SIZE - BODY_SIZE) / 2, position.y + (SNAKE_SIZE - BODY_SIZE) / 2, BODY_SIZE, BODY_SIZE, Gosu::Color::YELLOW) }
   end
@@ -49,7 +49,7 @@ class Snake
   end
 
   def expand!
-    @body_positions.unshift(@head_position.dup)
+    @body_positions.push(@head_position.dup)
   end
 end
 
