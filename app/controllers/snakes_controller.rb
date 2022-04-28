@@ -6,6 +6,8 @@ class SnakesController
   def initialize
     @SnakeRepository = SnakeRepository.new
     @FoodRepository = FoodRepository.new
+    @SnakesView = SnakesView.new
+    @FoodsView = FoodsView.new
   end
 
   def move
@@ -14,6 +16,11 @@ class SnakesController
 
   def in_trap?
     @SnakeRepository.ch
+  end
+
+  def show_in_window(window)
+    @Snakes
+
   end
 
   got_food! if @snake.head_position == @food.position

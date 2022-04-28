@@ -24,8 +24,10 @@ class GameWindow < Gosu::Window
   end
 
   def draw
-    @snake.show(self)
-    @food.show(self)
+    @snakes_controller.show_in_window(self)
+    @foods_controller.show_in_window(self)
+    # @snake.show(self)
+    # @food.show(self)
   end
 
   def button_down(button)
