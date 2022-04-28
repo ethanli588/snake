@@ -1,22 +1,25 @@
 require 'gosu'
-require_relative "snake"
-require_relative "food"
-require "pry-byebug"
+require_relative 'snake'
+require_relative 'food'
+require 'pry-byebug'
 require_relative 'constants'
 require_relative 'controller'
-
 
 class GameWindow < Gosu::Window
   def initialize
     super(WINDOW_WIDTH, WINDOW_HEIGHT, false, 300)
-    self.caption = "Snake Game"
-    @controller = controller.new
+    self.caption = 'Snake Game'
+    @snakes_controller = SnakesController.new
+    @foods_controller = FoodsController.new
   end
 
   def update
-    @snake.move!
-    game_restart if @snake.stuck?
-    game_restart unless @snake.head_position.in_rect?(Position.new, Position.new(WINDOW_WIDTH, WINDOW_HEIGHT))
+    # controller.update
+    @snakes_controller.move
+    game_restart if @snakes_controller.in_trap?
+
+    @snakes_controller.
+
     got_food! if @snake.head_position == @food.position
   end
 
