@@ -3,15 +3,14 @@ require_relative "snake"
 require_relative "food"
 require "pry-byebug"
 require_relative 'constants'
+require_relative 'controller'
 
 
 class GameWindow < Gosu::Window
   def initialize
     super(WINDOW_WIDTH, WINDOW_HEIGHT, false, 300)
     self.caption = "Snake Game"
-    @snake = Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-    # byebug
-    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
+    @controller = controller.new
   end
 
   def update
