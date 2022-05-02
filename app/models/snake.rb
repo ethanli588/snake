@@ -28,10 +28,10 @@ class Snake
     @head_position.move_towards!(@direction, SNAKE_SIZE)
   end
 
-  def show(window)
-    window.draw_rect(@head_position.x, @head_position.y, SNAKE_SIZE, SNAKE_SIZE, Gosu::Color::WHITE)
-    @body_positions.each { |position| window.draw_rect(position.x + (SNAKE_SIZE - BODY_SIZE) / 2, position.y + (SNAKE_SIZE - BODY_SIZE) / 2, BODY_SIZE, BODY_SIZE, Gosu::Color::YELLOW) }
-  end
+  # def show(window)
+  #   window.draw_rect(@head_position.x, @head_position.y, SNAKE_SIZE, SNAKE_SIZE, Gosu::Color::WHITE)
+  #   @body_positions.each { |position| window.draw_rect(position.x + (SNAKE_SIZE - BODY_SIZE) / 2, position.y + (SNAKE_SIZE - BODY_SIZE) / 2, BODY_SIZE, BODY_SIZE, Gosu::Color::YELLOW) }
+  # end
 
   def turn!(new_direction)
     @direction.turn_to!(new_direction) unless @direction.oppsite?(new_direction)

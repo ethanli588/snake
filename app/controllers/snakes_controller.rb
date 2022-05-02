@@ -4,23 +4,22 @@ require_relative '../model/direction'
 
 class SnakesController
   def initialize
-    @SnakeRepository = SnakeRepository.new
-    @FoodRepository = FoodRepository.new
-    @SnakesView = SnakesView.new
-    @FoodsView = FoodsView.new
+    @snake_repository = SnakeRepository.new
+    @food_repository = FoodRepository.new
+    @snakes_view = SnakesView.new
+    @foods_view = FoodsView.new
   end
 
   def move
-    @SnakeRepository.move
+    @snake_repository.move
   end
 
   def in_trap?
-    @SnakeRepository.ch
+    @snake_repository.ch
   end
 
   def show_in_window(window)
-    @Snakes
-
+    @snakes_view.show_in_window(snake_repository, window)
   end
 
   got_food! if @snake.head_position == @food.position
