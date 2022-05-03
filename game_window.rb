@@ -30,10 +30,10 @@ class GameWindow < Gosu::Window
   def button_down(button)
     super
     case button
-    when Gosu::KbLeft then @snake.turn!(Direction.new(Direction::LEFT))
-    when Gosu::KbRight then @snake.turn!(Direction.new(Direction::RIGHT))
-    when Gosu::KbUp then @snake.turn!(Direction.new(Direction::UP))
-    when Gosu::KbDown then @snake.turn!(Direction.new(Direction::DOWN))
+    when Gosu::KbLeft then @snakes_controller.turn_left
+    when Gosu::KbRight then @snakes_controller.turn_right
+    when Gosu::KbUp then @snakes_controller.turn_up
+    when Gosu::KbDown then @snakes_controller.turn_down
     end
   end
 

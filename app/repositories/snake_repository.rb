@@ -2,6 +2,7 @@ class SnakeRepository
   def initialize
     @snakes = []
     @snakes << Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+    @active_snake_index = 0
   end
 
   def move
@@ -19,5 +20,9 @@ class SnakeRepository
 
   def expand_at(index)
     @snakes[index].expand!
+  end
+
+  def turn_active_snake(direction)
+    @snakes[@active_snake_index].turn!(direction)
   end
 end

@@ -7,7 +7,6 @@ class SnakesController
   def initialize(snake_repository, food_repository)
     @snake_repository = snake_repository
     @food_repository = food_repository
-    # @food_repository = FoodRepository.new
     @snakes_view = SnakesView.new
   end
 
@@ -23,19 +22,39 @@ class SnakesController
     @snakes_view.show_in_window(snake_repository, window)
   end
 
-  def got_food?
+  def expand_if_got_food
     snakes = @snake_repository.all
     foods = @food_repository.all
-    snakes.each do |snake|
+    snakes.each_with_index do |snake, index|
       foods.each do |food|
-        return true if snake.head_position == food.position
+        @snake_repository.expand_at(index) if snake.head_position == food.position
       end
     end
-    return false
   end
 
   # got_food! if @snake.head_position == @food.position
 
   # game_restart unless @snake.head_position.in_rect?(Position.new, Position.new(WINDOW_WIDTH, WINDOW_HEIGHT))
 
+  def turn_left
+    turn(Direction.new(Direction::LEFT))
+  end
+
+  def turn_right
+    turn(Direction.new(Direction::RIGHT))
+  end
+
+  def turn_up
+    turn(Direction.new(Direction::UP))
+  end
+
+  def turn_down
+    turn(Direction.new(Direction::DOWN))
+  end
+
+  private
+
+  def turn(position)
+    @snake_repository.turn_active_snake(position)
+  end
 end
