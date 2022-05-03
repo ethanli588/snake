@@ -1,5 +1,4 @@
-class snakes_view
-
+class SnakesView
   def show_in_window(snake_repository, window)
     snakes = snake_repository.all
     snakes.each do |snake|

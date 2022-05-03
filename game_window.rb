@@ -6,21 +6,18 @@ require_relative 'constants'
 require_relative 'controller'
 
 class GameWindow < Gosu::Window
-  def initialize
+  def initialize(snakes_controller, foods_controller)
     super(WINDOW_WIDTH, WINDOW_HEIGHT, false, 300)
     self.caption = 'Snake Game'
-    @snakes_controller = SnakesController.new
-    @foods_controller = FoodsController.new
+    @snakes_controller = snakes_controller
+    @foods_controller = foods_controller
   end
 
   def update
     # controller.update
     @snakes_controller.move
     game_restart if @snakes_controller.in_trap?
-
-    @snakes_controller.
-
-    got_food! if @snake.head_position == @food.position
+    @snakes_controller.expand_if_got_food
   end
 
   def draw
@@ -41,8 +38,8 @@ class GameWindow < Gosu::Window
   end
 
   def game_restart
-    @snake = Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
+    # @snakes_controller = SnakesController.new
+    # @foods_controller = FoodsController.new
   end
 
   private

@@ -1,12 +1,12 @@
+require_relative '../repositories/food_repository'
+
 class FoodsController
-  def initialize
-    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
+  def initialize(food_repository, snake_repository)
+    @food_repository = food_repository
+    @snake_repository = snake_repository
   end
 
-  def update
-    @snake.move!
-    game_restart if @snake.stuck?
-    game_restart unless @snake.head_position.in_rect?(Position.new, Position.new(WINDOW_WIDTH, WINDOW_HEIGHT))
-    got_food! if @snake.head_position == @food.position
+  def show_in_window(window)
+    @foods_view.show_in_window(food_repository, window)
   end
 end

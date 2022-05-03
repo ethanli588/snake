@@ -8,6 +8,7 @@ class Paint
   end
 
   def self.squre_in_window(attributes = {})
+    window = attributes[:window]
     up_left = attributes[:up_left]
     size = attributes[:size]
     attributes[:bottom_right] = Position.new(up_left.x + size, up_left.y + size)

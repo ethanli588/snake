@@ -12,4 +12,12 @@ class SnakeRepository
     @snakes.each { |snake| return true if snake.stuck? }
     return false
   end
+
+  def all
+    @snakes
+  end
+
+  def expand_at(index)
+    @snakes[index].expand!
+  end
 end
