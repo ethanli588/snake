@@ -17,7 +17,11 @@ class GameWindow < Gosu::Window
     # controller.update
     @snakes_controller.move
     game_restart if @snakes_controller.in_trap?
-    @snakes_controller.expand_if_got_food
+    indexs = @snakes_controller.return_two_index_if_got_food
+    if indexs
+      @SnakesController.expand_at(indexs[:snake_index])
+      @foods_controller.new_food_at(indexs[:food_index])
+    end
   end
 
   def draw

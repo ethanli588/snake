@@ -22,14 +22,18 @@ class SnakesController
     @snakes_view.show_in_window(snake_repository, window)
   end
 
-  def expand_if_got_food
+  def get_two_index_if_got_food
     snakes = @snake_repository.all
     foods = @food_repository.all
-    snakes.each_with_index do |snake, index|
-      foods.each do |food|
-        @snake_repository.expand_at(index) if snake.head_position == food.position
+    snakes.each_with_index do |snake, snake_index|
+      foods.each do |food, food_index|
+        return { snake_index: snake_index, food_index: food_index } if snake.head_position == food.position
       end
     end
+  end
+
+  def expand_at(index)
+    @snake_repository.expand_at(index)
   end
 
   # got_food! if @snake.head_position == @food.position

@@ -8,6 +8,7 @@ class FoodRepository
     @foods
   end
 
-  def new_food_if_eaten
+  def new_food_at(index)
+    @foods[index] = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZ)
   end
 end
