@@ -1,9 +1,9 @@
 require 'gosu'
-require_relative 'snake'
-require_relative 'food'
+require_relative 'app/models/snake'
+require_relative 'app/models/food'
 require 'pry-byebug'
-require_relative 'constants'
-require_relative 'controller'
+require_relative 'data/constants'
+# require_relative 'controller'
 
 class GameWindow < Gosu::Window
   def initialize(snakes_controller, foods_controller)
@@ -19,6 +19,7 @@ class GameWindow < Gosu::Window
     game_restart if @snakes_controller.in_trap?
     indexs = @snakes_controller.return_two_index_if_got_food
     if indexs
+      # byebug
       @SnakesController.expand_at(indexs[:snake_index])
       @foods_controller.new_food_at(indexs[:food_index])
     end

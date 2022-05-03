@@ -1,6 +1,7 @@
-require_relative '../model/snake'
-require_relative '../model/position'
-require_relative '../model/direction'
+require_relative '../models/snake'
+require_relative '../models/position'
+require_relative '../models/direction'
+require_relative '../views/snakes_view'
 
 
 class SnakesController
@@ -19,17 +20,18 @@ class SnakesController
   end
 
   def show_in_window(window)
-    @snakes_view.show_in_window(snake_repository, window)
+    @snakes_view.show_in_window(@snake_repository, window)
   end
 
-  def get_two_index_if_got_food
+  def return_two_index_if_got_food
     snakes = @snake_repository.all
     foods = @food_repository.all
     snakes.each_with_index do |snake, snake_index|
-      foods.each do |food, food_index|
+      foods.each_with_index do |food, food_index|
         return { snake_index: snake_index, food_index: food_index } if snake.head_position == food.position
       end
     end
+    nil
   end
 
   def expand_at(index)

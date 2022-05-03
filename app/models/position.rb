@@ -1,4 +1,4 @@
-require_relative "constants"
+require_relative '../../data/constants'
 require_relative "direction"
 require 'pry-byebug'
 

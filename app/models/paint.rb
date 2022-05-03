@@ -1,17 +1,21 @@
+require_relative 'position'
+require 'pry-byebug'
+
 class Paint
   def self.rect_in_window(attributes = {})
     window = attributes[:window]
-    up_left = attributes[:up_left]
+    top_left = attributes[:top_left]
     bottom_right = attributes[:bottom_right]
     color = attributes[:color]
-    window.draw_rect(up_left.x, up_left.y, bottom_right.x - up_left.x, bottom_right.y - up_left.y, color)
+    window.draw_rect(top_left.x, top_left.y, bottom_right.x - top_left.x, bottom_right.y - top_left.y, color)
   end
 
   def self.squre_in_window(attributes = {})
+    # byebug
     window = attributes[:window]
-    up_left = attributes[:up_left]
+    top_left = attributes[:top_left]
     size = attributes[:size]
-    attributes[:bottom_right] = Position.new(up_left.x + size, up_left.y + size)
+    attributes[:bottom_right] = Position.new(top_left.x + size, top_left.y + size)
     self.rect_in_window(attributes)
   end
 end

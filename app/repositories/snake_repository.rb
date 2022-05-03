@@ -1,3 +1,6 @@
+require_relative '../models/snake'
+require_relative '../models/position'
+
 class SnakeRepository
   def initialize
     @snakes = []
