@@ -3,7 +3,7 @@ require 'pry-byebug'
 require_relative 'position'
 
 class Food
-  attr_reader :position
+  attr_reader :position, :food_size
 
   def initialize(up_left, bottom_right, size)
     # byebug

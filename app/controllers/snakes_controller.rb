@@ -19,6 +19,10 @@ class SnakesController
     @snake_repository.snakes_stuck?
   end
 
+  def out_of_boundary?(window)
+    @snake_repository.out_of_boundary?(window.width, window.height)
+  end
+
   def show_in_window(window)
     @snakes_view.show_in_window(@snake_repository, window)
   end
@@ -56,6 +60,10 @@ class SnakesController
 
   def turn_down
     turn(Direction.new(Direction::DOWN))
+  end
+
+  def restart
+    @snake_repository.restart
   end
 
   private

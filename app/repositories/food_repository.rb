@@ -9,6 +9,10 @@ class FoodRepository
     @foods << Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
   end
 
+  def restart
+    @foods.clear
+    @foods << Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
+  end
   def all
     @foods
   end

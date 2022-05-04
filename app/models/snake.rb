@@ -5,7 +5,7 @@ require_relative 'direction'
 require 'pry-byebug'
 
 class Snake
-  attr_reader :head_position
+  attr_reader :head_position, :body_positions
 
   def initialize(position)
     @direction = Direction.new

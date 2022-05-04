@@ -14,13 +14,12 @@ class GameWindow < Gosu::Window
   end
 
   def update
-    # controller.update
     @snakes_controller.move
-    game_restart if @snakes_controller.in_trap?
+    game_restart if @snakes_controller.in_trap? || @snakes_controller.out_of_boundary?(self)
     indexs = @snakes_controller.return_two_index_if_got_food
     if indexs
       # byebug
-      @SnakesController.expand_at(indexs[:snake_index])
+      @snakes_controller.expand_at(indexs[:snake_index])
       @foods_controller.new_food_at(indexs[:food_index])
     end
   end
@@ -28,8 +27,6 @@ class GameWindow < Gosu::Window
   def draw
     @snakes_controller.show_in_window(self)
     @foods_controller.show_in_window(self)
-    # @snake.show(self)
-    # @food.show(self)
   end
 
   def button_down(button)
@@ -43,8 +40,8 @@ class GameWindow < Gosu::Window
   end
 
   def game_restart
-    # @snakes_controller = SnakesController.new
-    # @foods_controller = FoodsController.new
+    @snakes_controller.restart
+    @foods_controller.restart
   end
 
   private

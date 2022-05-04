@@ -10,9 +10,9 @@ class Position
     @y = position_y
   end
 
-  def self.rand_position_in_rect(up_left, bottom_right)
+  def self.rand_position_in_rect(top_left, bottom_right)
     # byebug
-    Position.new(rand((up_left.x)..(bottom_right.x)), rand((up_left.y)..(bottom_right.y)))
+    Position.new(rand((top_left.x)..(bottom_right.x)), rand((top_left.y)..(bottom_right.y)))
   end
 
   def copy!(position)
@@ -84,8 +84,8 @@ class Position
     return @x == position.x && @y == position.y - steps
   end
 
-  def in_rect?(up_left, bottom_right)
-    return self >= up_left && self <= bottom_right
+  def in_rect?(top_left, bottom_right)
+    return self >= top_left && self <= bottom_right
   end
 
 end
