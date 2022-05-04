@@ -1,9 +1,9 @@
-require_relative "game_window"
-require "pry-byebug"
-require_relative "app/controllers/foods_controller"
-require_relative "app/controllers/snakes_controller"
-require_relative "app/repositories/snake_repository"
-require_relative "app/repositories/food_repository"
+require_relative 'game_window'
+require 'pry-byebug'
+require_relative 'app/controllers/foods_controller'
+require_relative 'app/controllers/snakes_controller'
+require_relative 'app/repositories/snake_repository'
+require_relative 'app/repositories/food_repository'
 
 snake_repository = SnakeRepository.new
 food_repository = FoodRepository.new

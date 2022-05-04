@@ -10,6 +10,22 @@ class Direction
     @towards = towards
   end
 
+  def self.left
+    return self.new(LEFT)
+  end
+
+  def self.right
+    return self.new(RIGHT)
+  end
+
+  def self.up
+    return self.new(UP)
+  end
+
+  def self.DOWN
+    return self.new(DOWN)
+  end
+
   def oppsite?(direction)
     return direction.u_turn == self
   end

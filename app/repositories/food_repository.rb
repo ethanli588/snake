@@ -1,6 +1,5 @@
 require_relative '../models/food'
 require_relative '../models/position'
-# require_relative '../../data/constants'
 
 
 class FoodRepository
