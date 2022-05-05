@@ -1,18 +1,19 @@
-require_relative '../../data/constants'
-require_relative "direction"
 require 'pry-byebug'
+require 'active_record'
+require_relative '../../data/constants'
+require_relative 'direction'
 
-class Position
-  attr_accessor :x, :y
+class Position < ActiveRecord::Base
+  # attr_accessor :x, :y
 
-  def initialize(position_x = 0, position_y = 0)
-    @x = position_x
-    @y = position_y
-  end
+  # def initialize(position_x = 0, position_y = 0)
+  #   @x = position_x
+  #   @y = position_y
+  # end
 
   def self.rand_position_in_rect(top_left, bottom_right)
     # byebug
-    Position.new(rand((top_left.x)..(bottom_right.x)), rand((top_left.y)..(bottom_right.y)))
+    Position.new(x: rand((top_left.x)..(bottom_right.x)), y: rand((top_left.y)..(bottom_right.y)))
   end
 
   def copy!(position)
@@ -50,13 +51,15 @@ class Position
   end
 
   def move_towards(direction, steps = 1)
-    new_postion = Position.new(@x, @y)
+    new_postion = dup
     new_postion.move_towards!(direction, steps)
     return new_postion
   end
 
   def move_towards!(direction, steps = 1)
+    byebug
     case direction.towards
+
     when Direction::LEFT then @x -= steps
     when Direction::RIGHT then @x += steps
     when Direction::DOWN then @y += steps
@@ -87,5 +90,4 @@ class Position
   def in_rect?(top_left, bottom_right)
     return self >= top_left && self <= bottom_right
   end
-
 end

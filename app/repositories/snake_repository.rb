@@ -1,16 +1,18 @@
 require_relative '../models/snake'
 require_relative '../models/position'
+require 'pry-byebug'
 
 class SnakeRepository
   def initialize
     @snakes = []
-    @snakes << Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+    # byebug
+    @snakes << Snake.new(Position.new(x: WINDOW_WIDTH / 2, y: WINDOW_HEIGHT / 2))
     @active_snake_index = 0
   end
 
   def restart
     @snakes.clear
-    @snakes << Snake.new(Position.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+    @snakes << Snake.new(Position.new(x: WINDOW_WIDTH / 2, y: WINDOW_HEIGHT / 2))
   end
 
   def move
@@ -24,7 +26,7 @@ class SnakeRepository
 
   def out_of_boundary?(width, height)
     @snakes.each do |snake|
-      return true unless snake.head_position.in_rect?(Position.new(0, 0), Position.new(width, height))
+      return true unless snake.head_position.in_rect?(Position.new(x: 0, y: 0), Position.new(x: width, y: height))
     end
     return false
   end

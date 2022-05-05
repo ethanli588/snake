@@ -3,6 +3,8 @@ require_relative 'app/models/snake'
 require_relative 'app/models/food'
 require 'pry-byebug'
 require_relative 'data/constants'
+require_relative "config/application"
+
 # require_relative 'controller'
 
 class GameWindow < Gosu::Window
@@ -47,7 +49,7 @@ class GameWindow < Gosu::Window
   private
 
   def got_food!
-    @food = Food.new(Position.new(0, 0), Position.new(WINDOW_WIDTH, WINDOW_HEIGHT), SNAKE_SIZE)
+    @food = Food.new(Position.new(x: 0, y: 0), Position.new(x: WINDOW_WIDTH, y: WINDOW_HEIGHT), SNAKE_SIZE)
     @snake.got_food!
   end
 end
