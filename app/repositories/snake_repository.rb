@@ -16,7 +16,9 @@ class SnakeRepository
   end
 
   def move
-    @snakes.each { |snake| snake.move! }
+    @snakes.each do |snake|
+      snake.move!
+    end
   end
 
   def snakes_stuck?

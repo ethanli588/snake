@@ -22,7 +22,7 @@ class Direction
     return self.new(UP)
   end
 
-  def self.DOWN
+  def self.down
     return self.new(DOWN)
   end
 

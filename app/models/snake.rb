@@ -24,6 +24,7 @@ class Snake
   end
 
   def move!
+    # byebug
     move_body! if body?
     @head_position.move_towards!(@direction, SNAKE_SIZE)
   end

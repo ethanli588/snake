@@ -14,7 +14,7 @@ class Paint
     # byebug
     top_left = attributes[:top_left]
     size = attributes[:size]
-    attributes[:bottom_right] = Position.new(top_left.x + size, top_left.y + size)
+    attributes[:bottom_right] = Position.new(x: top_left.x + size, y: top_left.y + size)
     rect_in_window(attributes)
   end
 end
