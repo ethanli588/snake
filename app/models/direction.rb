@@ -1,4 +1,5 @@
 class Direction
+  # the basic class
   attr_reader :towards
 
   LEFT = 0
